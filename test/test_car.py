@@ -10,6 +10,8 @@ from engine.model.glissade import Glissade
 from engine.model.palindrome import Palindrome
 from engine.model.rorschach import Rorschach
 from engine.model.thovex import Thovex
+from tyres.carrigan_tyre import Carrigan_Tyre
+from tyres.octoprime_tyre import Octoprime_Tyre
 
 
 class TestNubbin(unittest.TestCase):
@@ -80,6 +82,29 @@ class TestWilloughby(unittest.TestCase):
         last_service_mileage = 0
         engine = willoughby_engine(current_mileage, last_service_mileage)
         self.assertFalse(engine.needs_service())
+
+class TestCarrigan(unittest.TestCase):
+    def test_tyre_should_be_serviced(self):
+        arr=[1,1,0.9,1]
+        tyre = Carrigan_Tyre(arr)
+        self.assertTrue(tyre.needs_service())
+
+    def test_tyre_should_not_be_serviced(self):
+        arr=[1,1,1,1]
+        tyre = Carrigan_Tyre(arr)
+        self.assertFalse(tyre.needs_service())
+
+class TestOctoprime(unittest.TestCase):
+    def test_tyre_should_be_serviced(self):
+        arr=[1,1,1,1]
+        tyre = Octoprime_Tyre(arr)
+        self.assertTrue(tyre.needs_service())
+
+    def test_tyre_should_not_be_serviced(self):
+        arr=[0.1,0.1,0.2,0.2]
+        tyre = Carrigan_Tyre(arr)
+        self.assertFalse(tyre.needs_service())
+
 
 
 if __name__ == '__main__':
